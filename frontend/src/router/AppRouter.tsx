@@ -1,6 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { HomePage  } from "../pages/Home/Home";
-import { LoginPage } from "../pages/Login/Login";
+import { SignInPage } from "../pages/Login/SignInPage";
+import { SignUpPage } from "../pages/Register/SignUpPage"; 
+
 
 const router = createBrowserRouter([
     {
@@ -10,13 +12,18 @@ const router = createBrowserRouter([
 
     {
         path: '/login',
-        element: <LoginPage/ >
+        element: <SignInPage/ >
+    },
+    
+    {
+        path: '/register',
+        element: <SignUpPage/ >
     },
 
     {
         path: '*',
-        element: <div style={{ padding: '20px' }}><h2>Страница не найдена 404</h2></div>
-    },
+        element: <div style={{ padding: '20px' }}><h2>Not found 404</h2></div>
+    }, 
 ]);
 
 export const AppRouter = () => {
