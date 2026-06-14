@@ -1,0 +1,31 @@
+src/
+├── api/                  # Настройки Axios / Fetch клиентов, интерцепторы
+│   └── apiClient.ts      # Базовый URL, обработка 401/403 ошибок, токенов
+├── assets/               # Картинки, шрифты, SVG-иконки
+├── components/           # ГЛОБАЛЬНЫЕ (переиспользуемые) компоненты
+│   ├── ui/               # Атомарные элементы (Button, Input, Modal, Spinner)
+│   │   ├── Button.tsx
+│   │   └── Input.tsx
+│   └── Layout/           # Каркас сайта (Header, Sidebar, Footer)
+│       ├── Header.tsx
+│       └── Layout.tsx
+├── context/              # Глобальные контексты (AuthContext, ThemeContext)
+├── hooks/                # Глобальные кастомные хуки (useAuth, useLocalStorage)
+├── pages/                # СТРАНИЦЫ приложения (каждая папка — отдельный экран)
+│   ├── Home/             # Главная страница
+│   │   ├── components/   # Компоненты, нужные ТОЛЬКО для этой страницы
+│   │   ├── hooks/        # Хуки, нужные ТОЛЬКО для этой страницы
+│   │   └── HomePage.tsx  # Сам компонент страницы
+│   ├── Login/            # Страница авторизации
+│   └── Dashboard/        # Панель управления
+├── router/               # Конфигурация маршрутизации (React Router)
+│   └── AppRouter.tsx     # Защищенные (Private) и публичные роуты
+├── services/             # API-сервисы (функции запросов к конкретным эндпоинтам бэкенда)
+│   ├── authService.ts    # Запросы /api/auth/login, logout
+│   └── helloService.ts   # Запросы к твоему /api/hello
+├── types/                # Глобальные TypeScript интерфейсы и типы
+│   └── index.ts          # Например, User, ServerResponse и т.д.
+├── App.css               # Стили для корневого компонента
+├── App.tsx               # Точка сборки, где подключаются провайдеры и роутер
+├── index.css             # Глобальные стили (Reset, переменные темы, Tailwind если есть)
+└── main.tsx              # Входная точка для Vite (рендерит App в DOM)

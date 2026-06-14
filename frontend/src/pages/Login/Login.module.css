@@ -1,0 +1,156 @@
+.container {
+  background-color: #0c0d10;
+  color: #e6edf3;
+  width: 100%;
+  height: 100vh;
+  font-family: "Courier New", Courier, monospace;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.backButton {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: transparent;
+  border: 1px solid #8892b0;
+  color: #8892b0;
+  padding: 8px 15px;
+  font-family: inherit;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+
+.backButton:hover {
+  border-color: #ff4466;
+  color: #ff4466;
+  box-shadow: 0 0 10px rgba(255, 68, 102, 0.3);
+}
+
+.loginCard {
+  width: 100%;
+  max-width: 450px;
+  background-color: #131722;
+  border: 1px solid #252d3d;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardHeader {
+  background-color: #1c2130;
+  border-bottom: 1px solid #252d3d;
+  padding: 12px 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #39ff14;
+  letter-spacing: 1px;
+}
+
+.blinkToken {
+  color: #ff6600;
+  animation: blink 1.5s infinite;
+}
+
+.cardBody {
+  padding: 30px;
+}
+
+.title {
+  color: #ff6600;
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+}
+
+.subtitle {
+  color: #8892b0;
+  font-size: 0.85rem;
+  margin: 0 0 25px 0;
+  line-height: 1.4;
+}
+
+.errorBox {
+  background-color: rgba(255, 68, 102, 0.1);
+  border: 1px solid #ff4466;
+  color: #ff4466;
+  padding: 12px;
+  font-size: 0.8rem;
+  margin-bottom: 20px;
+  border-radius: 2px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 0.75rem;
+  color: #39ff14;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.inputField {
+  background-color: #07080b;
+  border: 1px solid #252d3d;
+  color: #e6edf3;
+  padding: 12px;
+  font-family: inherit;
+  outline: none;
+  font-size: 1rem;
+  border-radius: 2px;
+  transition: border-color 0.2s;
+}
+
+.inputField:focus {
+  border-color: #39ff14;
+  box-shadow: 0 0 5px rgba(57, 255, 20, 0.2);
+}
+
+.submitButton {
+  background-color: transparent;
+  border: 1px solid #ff6600;
+  color: #ff6600;
+  padding: 14px;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  margin-top: 10px;
+  transition: all 0.2s;
+}
+
+.submitButton:hover {
+  background-color: #ff6600;
+  color: #000;
+  box-shadow: 0 0 15px rgba(255, 102, 0, 0.4);
+}
+
+.cardFooter {
+  padding: 15px 30px;
+  border-top: 1px solid #252d3d;
+  font-size: 0.7rem;
+  color: #8892b0;
+  text-align: center;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
