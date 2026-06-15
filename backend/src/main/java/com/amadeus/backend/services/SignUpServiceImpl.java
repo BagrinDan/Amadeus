@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
+
 
 @Service
 @AllArgsConstructor
@@ -21,10 +21,6 @@ public class SignUpServiceImpl implements SignUpService {
     public String registerUser(SignUpRequest request) {
         if(!this.isStrongPassword(request.getPassword())){
             throw new IllegalArgumentException("Password is not strong");
-        }
-
-        if(!request.getPassword().equals(request.getConfirmPassword())){
-            throw new IllegalArgumentException("Passwords don't match");
         }
 
         String hash = encoder.encode(request.getPassword());
