@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './Login.module.css';
+import styles from './SignInPage.module.css';
 
 
 
 
-export const LoginPage = () => {
+export const SignInPage = () => {
   const [memberLogin, setMemberLogin] = useState('');
   const [memberPassword, setMemberPasswordCode] = useState('');
   const [error, setError] = useState('');
@@ -76,6 +76,12 @@ export const LoginPage = () => {
 
             <button type="submit" className={styles.submitButton}>
               Initiate Handshake
+            </button>
+            <button 
+            className={styles.submitButton}
+              onClick={() => navigate('/register')}
+            >              
+            Register
             </button>
           </form>
         </div>
