@@ -1,0 +1,83 @@
+# ==========================================
+# 1. BACKEND (Java, Spring Boot, Maven)
+# ==========================================
+# Результаты сборки бэкенда
+backend/target/
+backend/bin/
+
+# Логи приложения
+backend/*.log
+backend/logs/
+
+# Файлы конфигурации среды (секреты, пароли к MariaDB)
+backend/.env
+backend/.env.local
+backend/src/main/resources/application-local.properties
+
+# Дополнительные артефакты Maven
+backend/pom.xml.tag
+backend/pom.xml.releaseBackup
+backend/pom.xml.versionsBackup
+backend/release.properties
+
+
+# ==========================================
+# 2. FRONTEND (React, TypeScript, Node)
+# ==========================================
+# Менеджеры пакетов (зависимости)
+frontend/node_modules/
+frontend/.pnpm-store/
+
+# Результаты сборки фронтенда (Vite / Webpack / CRA)
+frontend/dist/
+frontend/build/
+frontend/out/
+
+# Логи и кэш фронта
+frontend/.eslintcache
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/.turbo/
+
+# Локальные переменные окружения фронта
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+
+
+# ==========================================
+# 3. DATABASE (MariaDB / Docker)
+# ==========================================
+# Если будешь хранить локальные дампы базы данных в проекте
+*.sql
+*.dump
+
+# Если запустишь MariaDB через Docker внутри проекта и вынесешь volumes в папку
+**/data/
+**/db_data/
+**/mariadb_data/
+
+
+# ==========================================
+# 4. IDE, EDITORS & SYSTEM (VS Code, JetBrains, OS)
+# ==========================================
+# VS Code (включая локальные настройки воркспейса)
+.vscode/
+*.code-workspace
+.history/
+
+# IntelliJ IDEA / Eclipse
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.metadata/
+.classpath
+.project
+.settings/
+
+# Системный мусор
+.DS_Store
+Thumbs.db
