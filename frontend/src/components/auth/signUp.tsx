@@ -1,6 +1,6 @@
 import { signUpApi } from "../../api/auth/signUpApi";
 import { useState } from "react";
-import { type SignUpRequest } from "../../types/auth/auth";
+import { type SignUpRequest } from "../../types/auth/SignUpRequest";
 
 
 const SignUpForm = () => {

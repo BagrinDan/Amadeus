@@ -1,4 +1,4 @@
-import { type SignUpRequest } from "../../types/auth/auth";
+import { type SignUpRequest } from "../../types/auth/SignUpRequest";
 import { API_CONFIG } from "../../config/api.config";
 
 

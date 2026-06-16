@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './SignUpPage.module.css';
 import { signUpApi } from '../../api/auth/signUpApi';
-import { type SignUpRequest } from '../../types/auth/auth';
+import { type SignUpRequest } from '../../types/auth/SignUpRequest';
 
 
 

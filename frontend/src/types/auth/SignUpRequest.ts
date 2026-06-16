@@ -3,7 +3,3 @@ export interface SignUpRequest{
     password: string;
     confirmPassword: string;
 }
-
-export interface SignUpResponse{
-    message: string;
-}
