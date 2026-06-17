@@ -50,8 +50,13 @@ jobs:
         env:
           VITE_API_URL: ${{ secrets.VITE_API_URL }}
 
+      - name: Zip Frontend dist
+        run: |
+          cd frontend/dist
+          zip -r ../../frontend.zip .
+
       - name: Deploy Frontend to Azure App Service
         uses: azure/webapps-deploy@v3
         with:
           app-name: AmadeusFrontend
-          package: frontend/dist
+          package: frontend.zip
