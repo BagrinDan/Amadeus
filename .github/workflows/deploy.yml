@@ -31,15 +31,14 @@ jobs:
       - name: Deploy Backend to Azure App Service
         uses: azure/webapps-deploy@v3
         with:
-          app-name: AmadeusBackeend # Убедитесь, что имя совпадает с Azure (в коде у вас опечатка: Backeend)
-          # Передаем напрямую собранный JAR-файл, так как выбрали стек Java SE (Embedded Web Server)
+          app-name: AmadeusBackeend 
           package: backend/target/*.jar 
 
       # --- СБОРКА И ДЕПЛОЙ ФРОНТЕНДА (Node.js / React) ---
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Соответствует выбранной Node 20 LTS в Azure
+          node-version: '20' 
           cache: 'npm'
           cache-dependency-path: frontend/package-lock.json
 
@@ -48,10 +47,11 @@ jobs:
         run: |
           npm ci
           npm run build
+        env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
 
       - name: Deploy Frontend to Azure App Service
         uses: azure/webapps-deploy@v3
         with:
           app-name: AmadeusFrontend
-          # Отправляем папку с готовым статическим билдом (для Vite это обычно папка dist, для CRA — build)
           package: frontend/dist
