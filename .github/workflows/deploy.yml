@@ -1,0 +1,62 @@
+name: Build & Deploy to Azure
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy: # Названия action'a
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # --- СБОРКА И ДЕПЛОЙ БЭКЕНДА (Java / Spring Boot) ---
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build Spring Boot JAR
+        working-directory: backend
+        run: mvn clean package -DskipTests
+
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_SECRET }} # Секрет созданный через Github -> Settings -> Secrets and Variabiles -> Action
+
+      - name: Deploy Backend to Azure App Service
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: AmadeusBackeend 
+          package: backend/target/*.jar 
+
+      # --- СБОРКА И ДЕПЛОЙ ФРОНТЕНДА (Node.js / React) ---
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' 
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies and Build Frontend
+        working-directory: frontend
+        run: |
+          npm ci
+          npm run build
+        env:
+          VITE_API_URL: ${{ secrets.VITE_API_URL }} # Читается через .env на фронте
+
+      - name: Zip Frontend dist
+        run: |
+          cd frontend/dist
+          zip -r ../../frontend.zip .
+
+      - name: Deploy Frontend to Azure App Service
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: AmadeusFrontend
+          package: frontend.zip
