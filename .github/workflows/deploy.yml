@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  build-and-deploy:
+  build-and-deploy: # Названия action'a
     runs-on: ubuntu-latest
 
     steps:
@@ -26,7 +26,7 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          creds: ${{ secrets.AZURE_SECRET }}
+          creds: ${{ secrets.AZURE_SECRET }} # Секрет созданный через Github -> Settings -> Secrets and Variabiles -> Action
 
       - name: Deploy Backend to Azure App Service
         uses: azure/webapps-deploy@v3
@@ -48,7 +48,7 @@ jobs:
           npm ci
           npm run build
         env:
-          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_API_URL: ${{ secrets.VITE_API_URL }} # Читается через .env на фронте
 
       - name: Zip Frontend dist
         run: |
