@@ -1,6 +1,6 @@
 package com.amadeus.backend.services;
 
-import com.amadeus.backend.dto.response.SignUpRequest;
+import com.amadeus.backend.dto.request.SignUpRequest;
 import com.amadeus.backend.models.UserEntity;
 import com.amadeus.backend.repositories.UserRepository;
 import com.amadeus.backend.services.interfaces.SignUpService;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class SignUpServiceImpl implements SignUpService {
-
     private final UserRepository repository;
     private final PasswordEncoder encoder;
 
