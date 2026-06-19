@@ -3,7 +3,7 @@ import { API_CONFIG } from "../../config/api.config";
 
 
 export const signInApi = async (data: SignInRequest): Promise<string> => {
-    const response = await fetch(`${API_CONFIG.BASE_URL}/auth/signUp`, {
+    const response = await fetch(`${API_CONFIG.BASE_URL}/auth/signIn`, {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './SignInPage.module.css';
-
+import { signInApi } from '../../api/auth/signInApi'; 
 
 
 
@@ -12,17 +12,18 @@ export const SignInPage = () => {
   
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-
-    if (memberLogin.trim() === '001' && memberPassword === 'elpsykongroo') {
-      navigate('/');
-    } else if (!memberLogin.trim() || !memberPassword) {
-      setError('CRITICAL ERROR: Empty credentials detected.');
-    } else {
-      setError('ACCESS DENIED: Invalid Lab Member Login or Access Code.');
-    }
+  const handleSubmit = async (e: React.FormEvent) => {
+      e.preventDefault();
+      setError('');
+      try {
+          await signInApi({
+              username: memberLogin,
+              password: memberPassword,
+          });
+          navigate('/');
+      } catch (err: any) {
+          setError(err.message || 'ACCESS DENIED: Invalid Lab Member Login or Access Code.');
+      }
   };
 
   /* 

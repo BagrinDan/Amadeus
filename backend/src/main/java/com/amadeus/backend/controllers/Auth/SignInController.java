@@ -11,11 +11,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @RequestMapping("/auth")
 @AllArgsConstructor
 public class SignInController {
-
     private final SignInService service;
     private final CookieUtil util;
 
@@ -29,7 +29,7 @@ public class SignInController {
 
         return ResponseEntity
                 .status(HttpStatus.ACCEPTED)
-                .body(new AuthResponse("Lab member created"));
+                .body(new AuthResponse("Welcome"));
     }
 
     @GetMapping("/logOut")
@@ -40,5 +40,4 @@ public class SignInController {
                 .status(HttpStatus.ACCEPTED)
                 .body("Logout completed");
     }
-
 }
