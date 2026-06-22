@@ -1,14 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Home.module.css';
+import { getVersion } from "../../api/global/version";
 
 export const HomePage = () => {
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  const [version, setVersion] = useState("");
+
+  useEffect(() => {
+    getVersion().then(setVersion);
+  }, []);
 
   return (
     <div className={styles.container}>
       <div className={styles.loginWrapper}>
+        <p> {version} </p>
         <button 
           className={styles.loginButton}
           onClick={() => navigate('/login')} 

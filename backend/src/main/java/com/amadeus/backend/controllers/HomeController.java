@@ -10,8 +10,8 @@ import java.util.Map;
 @RequestMapping("/api")
 public class HomeController {
 
-    @GetMapping("/hello")
-    public Map<String, String> hello(){
-        return Map.of("message", "HELLOOO!");
+    @GetMapping("/version")
+    public String getVersion (){
+        return "0.0.3";
     }
 }
