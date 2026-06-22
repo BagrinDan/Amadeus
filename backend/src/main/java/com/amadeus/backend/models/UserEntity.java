@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", schema = "auth")
 @SuperBuilder
 @NoArgsConstructor
 public class UserEntity extends BaseEntity implements UserDetails {
