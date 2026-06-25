@@ -13,6 +13,7 @@ backend/logs/
 backend/.env
 backend/.env.local
 backend/src/main/resources/application-local.properties
+tests/.env
 
 # Дополнительные артефакты Maven
 backend/pom.xml.tag
@@ -81,3 +82,7 @@ out/
 # Системный мусор
 .DS_Store
 Thumbs.db
+test.txt
+tests/.venv
+tests/__pycache__
+tests/.pytest_cache

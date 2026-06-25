@@ -34,6 +34,25 @@ jobs:
           app-name: AmadeusBackeend 
           package: backend/target/*.jar 
 
+      # --- SMOKE ТЕСТЫ
+      - name: Set up Python for Smoke Test
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.10'      
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      
+      - name: Run smoke test
+        env:
+          AZURE_APP_URL: ${{ secrets.AZURE_APP_URL }}
+          ACTUATOR_USER: ${{ secrets.ACTUATOR_USER }}
+          ACTUATOR_PASSWORD: ${{ secrets.ACTUATOR_PASSWORD }}
+        run: |
+          python -m pytest tests/smoke_server_test.py
+          python -m pytest tests/smoke_db_test.py
+
       # --- СБОРКА И ДЕПЛОЙ ФРОНТЕНДА (Node.js / React) ---
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -48,7 +67,7 @@ jobs:
           npm ci
           npm run build
         env:
-          VITE_API_URL: ${{ secrets.VITE_API_URL }} # Читается через .env на фронте
+          VITE_API_URL: ${{ secrets.VITE_API_URL }} # Читается через .env на фронте azure web app
 
       - name: Zip Frontend dist
         run: |
