@@ -1,8 +1,8 @@
 package com.amadeus.backend.controllers.Auth;
 
 
-import com.amadeus.backend.dto.response.SignUpRequest;
-import com.amadeus.backend.dto.response.SignUpResponse;
+import com.amadeus.backend.dto.request.SignUpRequest;
+import com.amadeus.backend.dto.response.AuthResponse;
 import com.amadeus.backend.services.interfaces.SignUpService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,9 +20,8 @@ public class SignUpController {
     private final SignUpService service;
 
     @PostMapping("/signUp")
-    public ResponseEntity<SignUpResponse> signUp(@RequestBody SignUpRequest request){
-        SignUpResponse response = new SignUpResponse();
-
+    public ResponseEntity<AuthResponse> signUp(@RequestBody SignUpRequest request){
+        AuthResponse response = new AuthResponse();
         response.setMessage(service.registerUser(request));
 
         return ResponseEntity

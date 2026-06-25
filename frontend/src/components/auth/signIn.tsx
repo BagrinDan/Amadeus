@@ -1,13 +1,13 @@
-import { signUpApi } from "../../api/auth/signUpApi";
+import { signInApi } from "../../api/auth/signInApi";
 import { useState } from "react";
-import { type SignUpRequest } from "../../types/auth/SignUpRequest";
+import { type SignInRequest } from "../../types/auth/SignInRequest";
 
 
-const SignUpForm = () => {
-  const [form, setForm] = useState<SignUpRequest>({
+
+const SignInForm = () => {
+  const [form, setForm] = useState<SignInRequest>({
     username: '',
     password: '',
-    confirmPassword: '',
   });
   const [message, setMessage] = useState('');
   const [isError, setIsError] = useState(false);
@@ -21,13 +21,12 @@ const SignUpForm = () => {
     e.preventDefault();
     setLoading(true);
     setMessage('');
-
     try {
-      const result = await signUpApi(form);
-      setMessage(result);   
+      const result = await signInApi(form);
+      setMessage(result);
       setIsError(false);
     } catch (err: any) {
-      setMessage(err.message); 
+      setMessage(err.message);
       setIsError(true);
     } finally {
       setLoading(false);
@@ -38,9 +37,8 @@ const SignUpForm = () => {
     <form onSubmit={handleSubmit}>
       <input name="username" placeholder="Username" onChange={handleChange} />
       <input name="password" type="password" placeholder="Password" onChange={handleChange} />
-      <input name="confirmPassword" type="password" placeholder="Confirm Password" onChange={handleChange} />
       <button type="submit" disabled={loading}>
-        {loading ? 'Loading...' : 'Sign Up'}
+        {loading ? 'Loading...' : 'Sign In'}
       </button>
       {message && (
         <p style={{ color: isError ? 'red' : 'green' }}>{message}</p>
@@ -49,4 +47,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default SignInForm;
