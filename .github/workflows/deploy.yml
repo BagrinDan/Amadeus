@@ -51,7 +51,7 @@ jobs:
           ACTUATOR_PASSWORD: ${{ secrets.ACTUATOR_PASSWORD }}
         run: |
           python -m pytest tests/smoke_server_test.py
-
+          python -m pytest tests/smoke_db_test.py
 
       # --- СБОРКА И ДЕПЛОЙ ФРОНТЕНДА (Node.js / React) ---
       - name: Set up Node.js
