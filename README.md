@@ -1,8 +1,6 @@
 # Amadeus
 
-
-
-An AI‑focused application where users can create tasks and manage their calendar both manually and through AI assistance. 
+    An AI‑focused application where users can create tasks and manage their calendar both manually and through AI assistance. 
 The AI will be powered by an Ollama model, enhanced with fine‑tuning and Advanced RAG. 
 
     Stack:
@@ -13,7 +11,7 @@ The AI will be powered by an Ollama model, enhanced with fine‑tuning and Advan
     Current implementation:
         - Register
         - Auth
-        - CI/CD (Azure)
+        - CI/CD (Github Action + Azure Web Service F1)
 
     
     
