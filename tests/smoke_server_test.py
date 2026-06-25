@@ -16,9 +16,8 @@ ACTUATOR_PASSWORD=os.getenv("ACTUATOR_PASSWORD")
 def test_ping_azure():
     logger.info("\n[>] Start pinging Azure server...")
 
-    #target_url = AZURE_APP_URL + "/health"
-    target_url = "http://localhost:8080" + "/health"
- 
+    target_url = AZURE_APP_URL + "/health"
+
     try:
         response = requests.get(target_url, timeout=120)
         assert response.status_code == 200, f"[!] Server returned error code: {response.status_code}"

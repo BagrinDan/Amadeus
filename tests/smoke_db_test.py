@@ -17,7 +17,6 @@ def test_ping_db():
 
     logger.info("\n[>] Start pinging Azure DB ...")
     target_url = AZURE_APP_URL + "/actuator/health/db"
-
     
     try:
         response = requests.get(
