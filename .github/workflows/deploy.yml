@@ -42,7 +42,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          pip install -r tests/requirements.txt
       
       - name: Run smoke test
         env:
