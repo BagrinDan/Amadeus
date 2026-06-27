@@ -23,10 +23,10 @@ jobs:
         working-directory: backend
         run: mvn clean package -DskipTests
 
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          creds: ${{ secrets.AZURE_SECRET }} # Секрет созданный через Github -> Settings -> Secrets and Variabiles -> Action
+      #- name: Login to Azure
+       # uses: azure/login@v2
+        #with:
+         # creds: ${{ secrets.AZURE_SECRET }} # Секрет созданный через Github -> Settings -> Secrets and Variabiles -> Action
 
       - name: Deploy Backend to Azure App Service
         uses: azure/webapps-deploy@v3
@@ -36,6 +36,24 @@ jobs:
           package: backend/target/*.jar
 
       # --- SMOKE ТЕСТЫ
+      
+      #- name: Set up Python for Smoke Test
+       # uses: actions/setup-python@v5
+        #with:
+         # python-version: '3.11.10'      
+
+      #- name: Install dependencies
+       # run: |
+        #  pip install -r tests/requirements.txt
+      
+      #- name: Run smoke test
+       # env:
+        #  AZURE_APP_URL: ${{ secrets.AZURE_APP_URL }}
+         # ACTUATOR_USER: ${{ secrets.ACTUATOR_USER }}
+          #ACTUATOR_PASSWORD: ${{ secrets.ACTUATOR_PASSWORD }}
+        #run: |
+         # python -m pytest tests/smoke_server_test.py
+          #python -m pytest tests/smoke_db_test.py
       
 
 
