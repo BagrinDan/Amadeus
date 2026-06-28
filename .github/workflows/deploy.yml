@@ -23,17 +23,11 @@ jobs:
         working-directory: backend
         run: mvn clean package -DskipTests
 
-      #- name: Login to Azure
-       # uses: azure/login@v2
-        #with:
-         # creds: ${{ secrets.AZURE_SECRET }} # Секрет созданный через Github -> Settings -> Secrets and Variabiles -> Action
-
-      - name: Deploy Backend to Azure App Service
-        uses: azure/webapps-deploy@v3
+      - name: Login to Azure
+        uses: azure/login@v2
         with:
-          app-name: AmadeusBackeend
-          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-          package: backend/target/*.jar
+         creds: ${{ secrets.AZURE_SECRET }} # Секрет созданный через Github -> Settings -> Secrets and Variabiles -> Action
+
 
       # --- SMOKE ТЕСТЫ
       
