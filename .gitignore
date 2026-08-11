@@ -155,17 +155,12 @@ replay_pid*
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
 
-# End of https://www.toptal.com/developers/gitignore/api/java,linux,intellij
-# Скомпилированные файлы и директории сборки Maven
 target/
-*.class
 
 # Служебные файлы IntelliJ IDEA
 .idea/
 *.iml
-*.iws
 *.ipr
-out/
 
 # Системные файлы
 .DS_Store
