@@ -1,0 +1,93 @@
+/* Основной фон приложения */
+.main-root {
+    -fx-background-color: #0b0d0e;
+}
+
+/* Верхняя панель (Divergence Meter) */
+.divergence-value {
+    -fx-font-family: "Monospaced", "Courier New";
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ff6600; /* Сегментный оранжевый */
+}
+
+.divergence-sub {
+    -fx-font-family: "Monospaced", "Courier New";
+    -fx-font-size: 10px;
+    -fx-text-fill: #555555;
+    -fx-letter-spacing: 2px;
+}
+
+/* Область чата (Терминал) */
+.terminal-scroll {
+    -fx-background: #050607;
+    -fx-background-color: #050607;
+    -fx-border-color: #1a2228;
+    -fx-border-width: 1px;
+}
+
+.terminal-scroll .viewport {
+    -fx-background-color: #050607;
+}
+
+.terminal-box {
+    -fx-background-color: #050607;
+}
+
+.sys-msg {
+    -fx-font-family: "Monospaced", "Consolas";
+    -fx-font-size: 13px;
+    -fx-text-fill: #cc2244; /* Системный красный */
+}
+
+.user-msg {
+    -fx-font-family: "Monospaced", "Consolas";
+    -fx-font-size: 13px;
+    -fx-text-fill: #00ff66; /* Неоновый зеленый */
+}
+
+.ai-msg {
+    -fx-font-family: "Monospaced", "Consolas";
+    -fx-font-size: 13px;
+    -fx-text-fill: #33ccff; /* Неоновый голубой */
+}
+
+/* Контейнер спрайта */
+.character-box {
+    -fx-border-color: #1a2228;
+    -fx-border-width: 1px 1px 1px 0px; /* Рамка с зазором под левую часть */
+    -fx-background-color: #050607;
+}
+
+/* Поле ввода */
+.terminal-input {
+    -fx-background-color: #050607;
+    -fx-text-fill: #00ff66;
+    -fx-prompt-text-fill: #2e4d36;
+    -fx-font-family: "Monospaced", "Consolas";
+    -fx-font-size: 13px;
+    -fx-border-color: #1a2228;
+    -fx-border-width: 1px;
+    -fx-padding: 8px 12px;
+}
+
+.terminal-input:focused {
+    -fx-border-color: #00ff66;
+}
+
+.terminal-button {
+    -fx-background-color: #050607;
+    -fx-text-fill: #00ff66;
+    -fx-font-family: "Monospaced", "Consolas";
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-border-color: #00ff66;
+    -fx-border-width: 1px;
+    -fx-padding: 8px 16px;
+    -fx-cursor: hand;
+}
+
+.terminal-button:hover {
+    -fx-background-color: #00ff66;
+    -fx-text-fill: #050607;
+}

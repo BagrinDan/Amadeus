@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.StackPane?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.example.amadeus.controller.MenuController"
+            prefHeight="600.0" prefWidth="1000.0"
+            styleClass="main-root"
+            stylesheets="@main_menu.css">
+
+
+    <!-- ============== -->
+    <!-- === HEADER === -->
+    <!-- ============== -->
+
+    <!-- Divergency Metric -->
+    <top>
+        <VBox alignment="CENTER" spacing="5.0">
+            <padding>
+                <Insets top="25.0" bottom="10.0"/>
+            </padding>
+            <Label text="1.048596%" styleClass="divergence-value"/>
+            <Label text="WORLD LINE DIVERGENCE METRIC" styleClass="divergence-sub"/>
+        </VBox>
+    </top>
+
+    <!-- TODO: Auth -->
+
+
+    <!-- Chat and Amadeus sprite -->
+    <center>
+        <HBox spacing="0.0" alignment="CENTER" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets left="15.0" right="15.0" top="5.0" bottom="15.0"/>
+            </padding>
+
+            <!-- Left part: Chat -->
+            <ScrollPane fitToWidth="true" fitToHeight="true" HBox.hgrow="ALWAYS" styleClass="terminal-scroll">
+                <VBox fx:id="chatHistoryBox" spacing="8.0" styleClass="terminal-box">
+                    <padding>
+                        <Insets top="11.0" right="11.0" bottom="11.0" left="11.0"/>
+                    </padding>
+                    <Label text="[SYSTEM] : Amadeus ready..." styleClass="sys-msg"/>
+                </VBox>
+            </ScrollPane>
+
+            <!-- Right part: Amadeus Sprites -->
+            <StackPane fx:id="characterImageContainer" prefWidth="900.0" styleClass="character-box"
+                       BorderPane.alignment="BOTTOM_CENTER" >
+                <ImageView fx:id="characterSprite" fitHeight="800.0" preserveRatio="true" pickOnBounds="true"/>
+            </StackPane>
+        </HBox>
+    </center>
+
+    <!-- SEND button -->
+    <bottom>
+        <HBox spacing="10.0" alignment="CENTER">
+            <padding>
+                <Insets left="15.0" right="15.0" bottom="15.0"/>
+            </padding>
+            <TextField fx:id="userInputField"
+                       promptText="Transmit cognitive data to Amadeus..."
+                       HBox.hgrow="ALWAYS"
+                       styleClass="terminal-input"
+                       onAction="#handleSendAction"/>
+
+            <Button text="SEND"
+                    styleClass="terminal-button"
+                    onAction="#handleSendAction"/>
+        </HBox>
+    </bottom>
+
+    <!-- ================ -->
+    <!-- === SETTINGS === -->
+    <!-- ================ -->
+
+    <!-- TODO: Change Amadeus Position -->
+    <!-- TODO: Zoom Chat -->
+    <!-- TODO: Zoom Amadeus -->
+    <!-- TODO: Change ration between chat and amadeus -->
+
+</BorderPane>
