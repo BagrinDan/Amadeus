@@ -91,3 +91,19 @@
     -fx-background-color: #00ff66;
     -fx-text-fill: #050607;
 }
+
+/* Ползунок */
+.split-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.split-pane *.split-pane-divider {
+    -fx-background-color: #000000;
+    -fx-padding: 0 3px 0 3px;
+}
+
+.split-pane *.split-pane-divider:hover {
+    -fx-background-color: #000000;
+    -fx-cursor: h-resize;
+}

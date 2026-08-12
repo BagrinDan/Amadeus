@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.SplitPane?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.example.amadeus.controller.MenuController"
             prefHeight="600.0" prefWidth="1000.0"
@@ -38,27 +39,27 @@
 
     <!-- Chat and Amadeus sprite -->
     <center>
-        <HBox spacing="0.0" alignment="CENTER" HBox.hgrow="ALWAYS">
+        <SplitPane fx:id="mainSplitPane" dividerPositions="0.5" VBox.vgrow="ALWAYS" styleClass="terminal-split-pane">
             <padding>
                 <Insets left="15.0" right="15.0" top="5.0" bottom="15.0"/>
             </padding>
+            <items>
+                <!-- Left part: Chat -->
+                <ScrollPane fitToWidth="true" fitToHeight="true" styleClass="terminal-scroll">
+                    <VBox fx:id="chatHistoryBox" spacing="8.0" styleClass="terminal-box">
+                        <padding>
+                            <Insets top="11.0" right="11.0" bottom="11.0" left="11.0"/>
+                        </padding>
+                        <Label text="[SYSTEM] : Amadeus ready..." styleClass="sys-msg"/>
+                    </VBox>
+                </ScrollPane>
 
-            <!-- Left part: Chat -->
-            <ScrollPane fitToWidth="true" fitToHeight="true" HBox.hgrow="ALWAYS" styleClass="terminal-scroll">
-                <VBox fx:id="chatHistoryBox" spacing="8.0" styleClass="terminal-box">
-                    <padding>
-                        <Insets top="11.0" right="11.0" bottom="11.0" left="11.0"/>
-                    </padding>
-                    <Label text="[SYSTEM] : Amadeus ready..." styleClass="sys-msg"/>
-                </VBox>
-            </ScrollPane>
-
-            <!-- Right part: Amadeus Sprites -->
-            <StackPane fx:id="characterImageContainer" prefWidth="900.0" styleClass="character-box"
-                       BorderPane.alignment="BOTTOM_CENTER" >
-                <ImageView fx:id="characterSprite" fitHeight="800.0" preserveRatio="true" pickOnBounds="true"/>
-            </StackPane>
-        </HBox>
+                <!-- Right part: Amadeus Sprites -->
+                <StackPane fx:id="characterImageContainer" styleClass="character-box">
+                    <ImageView fx:id="characterSprite" fitHeight="800.0" preserveRatio="true" pickOnBounds="true"/>
+                </StackPane>
+            </items>
+        </SplitPane>
     </center>
 
     <!-- SEND button -->

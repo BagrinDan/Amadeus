@@ -167,3 +167,7 @@ target/
 Thumbs.db
 
 src/main/resources/org/example/amadeus/sprites/
+models/
+src/main/resources/bin/linux/*
+src/main/resources/bin/win/*
+

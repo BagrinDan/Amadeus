@@ -3,6 +3,7 @@ package org.example.amadeus.controller;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,15 +18,22 @@ public class MenuController {
     @FXML private VBox chatHistoryBox;
     @FXML private ImageView characterSprite;
     @FXML private StackPane characterImageContainer;
+    @FXML private SplitPane mainSplitPane;
+
     private final MenuService menuService;
+
 
     public MenuController(MenuService menuService){
         this.menuService = menuService;
     }
 
-
     @FXML
     public void initialize() {
+        mainSplitPane.setDividerPositions(0.5);
+
+        characterSprite.fitWidthProperty().bind(characterImageContainer.widthProperty());
+        characterSprite.setPreserveRatio(true);
+
         if (!tryLoadSprite()) {
             showErrorMessageInImageArea();
         }
@@ -74,6 +82,7 @@ public class MenuController {
 
         characterImageContainer.getChildren().add(errorLabel);
     }
+
 
     private boolean tryLoadSprite() {
         try {
