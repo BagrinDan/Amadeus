@@ -1,0 +1,10 @@
+{
+  "ui": {
+    "windowWidth": 1000.0,
+    "windowHeight": 600.0,
+    "isMaximized": false,
+    "splitDividerPosition": 0.5,
+    "activeSkin": "default",
+    "autoScrollChat": true
+  }
+}

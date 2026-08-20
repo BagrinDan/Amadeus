@@ -7,14 +7,12 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
 import java.nio.file.*;
-import java.nio.file.attribute.PosixFilePermission;
 import java.util.Collections;
-import java.util.Set;
 import java.util.stream.Stream;
+
 
 
 public class EmbeddedLlmServiceImpl implements EmbeddedLlmService {
@@ -44,10 +42,11 @@ public class EmbeddedLlmServiceImpl implements EmbeddedLlmService {
                     "-m", modelPath,
                     "--port", String.valueOf(port),
                     "-c", "2048",
-                    "-ngl", "99" // задействует Vulkan GPU
+                    "-ngl", "99" // Trying to use GPU. If not - CPU
             );
 
-            pb.inheritIO();
+            pb.redirectError(ProcessBuilder.Redirect.INHERIT);
+            pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);
 
             this.demonProcess = pb.start();
 
@@ -59,51 +58,48 @@ public class EmbeddedLlmServiceImpl implements EmbeddedLlmService {
         }
     }
 
-    public void stopDemon() {
-        log.warn("[DEBUG] Stoping demon...");
-        if (demonProcess != null && demonProcess.isAlive()) {
-            demonProcess.destroyForcibly();
-        }
-    }
-
-    public boolean isDemonRunning() {
-        log.info("[DEBUG] Checking if demon is running..");
-        return demonProcess != null && demonProcess.isAlive();
-    }
-
-    public File prepareExecutable() throws IOException {
+    public File prepareExecutable() throws IOException{
         String os = System.getProperty("os.name").toLowerCase();
+        log.info("[EmbeddedLlmService | INFO]: detected OS {}", os);
+
         boolean isWindows = os.contains("win");
         String osFolder = isWindows ? "win" : "linux";
         String binaryName = isWindows ? "llama-server.exe" : "llama-server";
 
         File tempDir = new File(System.getProperty("java.io.tmpdir"), "amadeus-bin");
-        if (!tempDir.exists() && !tempDir.mkdirs()) {
-            log.error("Failed to create directory: {}", tempDir.getAbsolutePath());
+        if(!tempDir.exists() && !tempDir.mkdir()){
+            log.error("[EmbeddedLlmService | ERROR]: Failed to create directory {}", tempDir.getAbsolutePath());
         }
 
         String resourcePath = "/bin/" + osFolder;
 
-        try {
+        try{
             copyResourceFolder(resourcePath, tempDir);
-        } catch (Exception e) {
-            throw new IOException("Failed to extract binaries from " + resourcePath, e);
+        } catch (Exception e){
+            throw new IOException("[EmbeddedLlmService | EXCEPTION]: Failed to extract binaries from " + resourcePath, e);
         }
 
+        return resolveAndConfigureBinary(tempDir, binaryName, isWindows);
+    }
+
+    public File resolveAndConfigureBinary(File tempDir, String binaryName, boolean isWindows) throws FileNotFoundException{
         File targetBinary = new File(tempDir, binaryName);
 
-        if (!targetBinary.exists()) {
-            throw new FileNotFoundException("Executable " + binaryName + " not found in " + tempDir.getAbsolutePath());
+        if(!targetBinary.exists()){
+            throw new FileNotFoundException("[EmbeddedLlmService | EXCEPTION]: Executable " + binaryName + " not found in " + tempDir.getAbsolutePath());
         }
 
-        if (!isWindows) {
-
-            targetBinary.setExecutable(true);
+        if(!isWindows){
             File[] files = tempDir.listFiles();
-            if (files != null) {
-                for (File file : files) {
-                    file.setReadable(true, false);
-                    file.setExecutable(true, false);
+
+            if(files != null){
+                for(File file : files){
+                    boolean readOk = file.setReadable(true, false);
+                    boolean execOk = file.setExecutable(true, false);
+
+                    if(!readOk || !execOk){
+                        log.warn("[EmbeddedLlmService: WARN] Failed to set permissions for file: {}", file.getName());
+                    }
                 }
             }
         }
@@ -120,13 +116,11 @@ public class EmbeddedLlmServiceImpl implements EmbeddedLlmService {
         URI uri = url.toURI();
 
         if ("jar".equals(uri.getScheme())) {
-            // Если запуск происходит из собраного JAR файла
             try (FileSystem fileSystem = FileSystems.newFileSystem(uri, Collections.emptyMap())) {
                 Path remotePath = fileSystem.getPath(resourceFolderPath);
                 copyPathToDirectory(remotePath, targetFolder);
             }
         } else {
-            // Если запуск из IDE (обычные файлы на диске)
             Path localPath = Paths.get(uri);
             copyPathToDirectory(localPath, targetFolder);
         }
@@ -139,12 +133,23 @@ public class EmbeddedLlmServiceImpl implements EmbeddedLlmService {
                     String fileName = path.getFileName().toString();
                     File targetFile = new File(targetFolder, fileName);
 
-                    // Скопировать/перезаписать файл
                     Files.copy(path, targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                 } catch (IOException e) {
                     log.error("Failed to copy resource file: {}", path, e);
                 }
             });
         }
+    }
+
+    public void stopDemon() {
+        log.warn("[DEBUG] Stoping demon...");
+        if (demonProcess != null && demonProcess.isAlive()) {
+            demonProcess.destroyForcibly();
+        }
+    }
+
+    public boolean isDemonRunning() {
+        log.info("[DEBUG] Checking if demon is running..");
+        return demonProcess != null && demonProcess.isAlive();
     }
 }

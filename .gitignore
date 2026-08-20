@@ -166,8 +166,9 @@ target/
 .DS_Store
 Thumbs.db
 
-src/main/resources/org/example/amadeus/sprites/
-models/
+src/main/resources/sprites/*
+models/*
 src/main/resources/bin/linux/*
 src/main/resources/bin/win/*
 
+app_plan.txt
