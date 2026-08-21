@@ -19,7 +19,7 @@ public class SettingsManager {
 
     private final ObjectMapper mapper;
     private final File userConfigFile;
-    private AppConfig config;
+    private final AppConfig config;
 
     public SettingsManager() {
         this.mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
@@ -103,9 +103,6 @@ public class SettingsManager {
             // Windows: %APPDATA%/amadeus/config.json
             String appData = System.getenv("APPDATA");
             configDir = (appData != null) ? Paths.get(appData, APP_DIR_NAME) : Paths.get(userHome, "AppData", "Roaming", APP_DIR_NAME);
-        } else if (os.contains("mac")) {
-            // macOS: ~/Library/Application Support/amadeus/config.json
-            configDir = Paths.get(userHome, "Library", "Application Support", APP_DIR_NAME);
         } else {
             // Linux / Unix: ~/.config/amadeus/config.json
             String xdgConfig = System.getenv("XDG_CONFIG_HOME");

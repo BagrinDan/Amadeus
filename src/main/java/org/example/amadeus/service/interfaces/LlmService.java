@@ -4,6 +4,6 @@ import org.example.amadeus.dto.response.LlmResponse;
 
 import java.util.concurrent.CompletableFuture;
 
-public interface MenuService {
+public interface LlmService {
     CompletableFuture<LlmResponse> sendPromptAsync(String userPrompt);
 }
